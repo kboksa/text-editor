@@ -7,7 +7,7 @@ __  ___ ___  __  __ __ _
                                                        
 Dream Text Editor
 */                          
-`;                         
+                       
 `;
 
 export { header };
