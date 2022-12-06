@@ -20,7 +20,7 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: "./index.html",
-        title: "Dreamcatcher Text Editor",
+        title: "Dream Text Editor",
       }),
       // TODO: Add and configure workbox plugins for a service worker and manifest file.
       //service worker
@@ -32,7 +32,7 @@ module.exports = () => {
       new WebpackPwaManifest({
         fingerprints: false,
         inject: true,
-        name: "Dreamcatcher Text Editor",
+        name: "Dream Text Editor",
         short_name: "D.T.E",
         description: "Keep track of important tasks!",
         background_color: "#0F111A",
