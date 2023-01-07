@@ -3,9 +3,6 @@ const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
 const { InjectManifest } = require("workbox-webpack-plugin");
 
-// TODO: Add and configure workbox plugins for a service worker and manifest file.
-// TODO: Add CSS loaders and babel to webpack.
-
 module.exports = () => {
   return {
     mode: "development",
@@ -20,44 +17,32 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: "./index.html",
-        title: "Dream Text Editor",
+        title: "Just another text editor",
       }),
-      // TODO: Add and configure workbox plugins for a service worker and manifest file.
-      //service worker
-      new InjectManifest({
-        swSrc: "./src-sw.js",
-        swDest: "src-sw.js",
-      }),
-      //manifest.json
       new WebpackPwaManifest({
+        name: "Just Another Text Editor",
+        short_name: "JATE",
+        description: "Edit text like a pro",
+        start_url: "/",
+        publicPath: "/",
         fingerprints: false,
-        inject: true,
-        name: "Dream Text Editor",
-        short_name: "D.T.E",
-        description: "Keep track of important tasks!",
-        background_color: "#0F111A",
-        theme_color: "#0F111A",
-        start_url: "./",
-        publicPath: "./",
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
-            sizes: [96, 128, 192, 256, 384, 512],
+            sizes: [96, 128, 256, 512],
             destination: path.join("assets", "icons"),
           },
         ],
       }),
+      new InjectManifest({
+        swSrc: "./src-sw.js",
+        swDest: "src-sw.js",
+      }),
     ],
 
     module: {
-      // TODO: Add CSS loaders and babel to webpack.
-      //add css loader
       rules: [
-        {
-          test: /\.css$/i,
-          use: ["style-loader", "css-loader"],
-        },
-        //add babel
+        { test: /\.css$/i, use: ["style-loader", "css-loader"] },
         {
           test: /\.m?js$/,
           exclude: /node_modules/,
@@ -71,6 +56,14 @@ module.exports = () => {
               ],
             },
           },
+        },
+        {
+          test: /\.(png|jpe?g|gif)$/i,
+          use: [
+            {
+              loader: "file-loader",
+            },
+          ],
         },
       ],
     },
